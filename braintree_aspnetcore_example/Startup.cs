@@ -8,14 +8,21 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Braintree;
 
 namespace braintree_aspnetcore_example
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration config)
         {
-            Configuration = configuration;
+            BraintreeGateway gateway = new BraintreeGateway
+            {
+                Environment = config.GetValue<Braintree.Environment>(config.GetSection("Braintree")["Environment"]),
+                MerchantId = config.GetSection("Braintree")["MerchantId"],
+                PublicKey = config.GetSection("Braintree")["PublicKey"],
+                PrivateKey = config.GetSection("Braintree")["PrivateKey"]
+            };
         }
 
         public IConfiguration Configuration { get; }
