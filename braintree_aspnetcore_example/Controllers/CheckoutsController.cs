@@ -9,21 +9,21 @@ using braintree_aspnetcore_example.Models;
 
 namespace braintree_aspnetcore_example.Controllers
 {
-    public class HomeController : Controller
+    public class CheckoutsController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<CheckoutsController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public CheckoutsController(ILogger<CheckoutsController> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult New()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Show()
         {
             return View();
         }

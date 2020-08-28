@@ -50,7 +50,7 @@ namespace braintree_aspnetcore_example
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Checkouts}/{action=New}/{id?}");
             });
         }
     }
