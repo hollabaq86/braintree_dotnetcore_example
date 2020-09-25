@@ -16,20 +16,18 @@ namespace braintree_aspnetcore_example
     {
         public Startup(IConfiguration config)
         {
-            BraintreeGateway gateway = new BraintreeGateway
-            {
-                Environment = config.GetValue<Braintree.Environment>(config.GetSection("Braintree")["Environment"]),
-                MerchantId = config.GetSection("Braintree")["MerchantId"],
-                PublicKey = config.GetSection("Braintree")["PublicKey"],
-                PrivateKey = config.GetSection("Braintree")["PrivateKey"]
-            };
+            Configuration = config;
         }
 
         public IConfiguration Configuration { get; }
 
+        public static Dictionary<string, string> BraintreeSettings { get; private set; }
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            BraintreeSettings = Configuration.GetSection("Braintree")
+                .GetChildren()
+                .ToDictionary(x => x.Key, x => x.Value);
             services.AddControllersWithViews();
         }
 
